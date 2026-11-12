@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  min-height: 100vh;
+  color: #2c3e50;
+}
+
+input, select, button {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: #8e44ad;
+  box-shadow: 0 0 8px rgba(142, 68, 173, 0.4);
+}
+
+button {
+  background: #8e44ad;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #732d91;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+/* Стили для карточек (форм) */
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  max-width: 450px;
+  margin: 40px auto;
+}
+
+.card h2 {
+  margin-top: 0;
+  text-align: center;
+  color: #4a235a;
+  margin-bottom: 25px;
+}
+
+a {
+  text-decoration: none;
+}
