@@ -23,7 +23,7 @@ export default function Entries() {
       await api.post("/entries", form);
       setForm({ date: "", mood: 3, note: "" });
       load();
-    } catch (err) { alert("Ошибка при добавлении"); }
+    } catch (err) { alert("Ошибка при добавлении. Проверь, запущен ли сервер!"); }
   };
 
   const remove = async (id) => {
@@ -34,12 +34,10 @@ export default function Entries() {
     } catch (err) { alert("Ошибка при удалении"); }
   };
 
-  // Статистика
   const total = entries.length;
   const avgMood = total > 0 ? (entries.reduce((acc, curr) => acc + curr.mood, 0) / total).toFixed(1) : 0;
   const goodDays = entries.filter(e => e.mood >= 4).length;
 
-  // Умная цитата
   let quote = "Добавь свою первую запись, чтобы отслеживать настроение!";
   if (total > 0) {
     if (avgMood >= 4) quote = "✨ Отличная динамика! Ты на позитиве, так держать!";
@@ -47,26 +45,19 @@ export default function Entries() {
     else quote = "🫂 Похоже, неделя была тяжелой. Отдохни и побудь с собой, всё наладится.";
   }
 
-  // Цвета для полоски слева
   const getMoodColor = (mood) => {
-    if (mood >= 4) return "#27ae60"; // Зеленый
-    if (mood === 3) return "#f1c40f"; // Желтый
-    return "#e74c3c"; // Красный
+    if (mood >= 4) return "#27ae60";
+    if (mood === 3) return "#f1c40f";
+    return "#e74c3c";
   };
 
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto" }}>
       
-      {/* Умная цитата */}
-      <div style={{ 
-        background: "white", padding: "20px", borderRadius: "12px", 
-        marginBottom: "20px", textAlign: "center", fontStyle: "italic",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.05)", color: "#4a235a"
-      }}>
+      <div style={{ background: "white", padding: "20px", borderRadius: "12px", marginBottom: "20px", textAlign: "center", fontStyle: "italic", boxShadow: "0 4px 10px rgba(0,0,0,0.05)", color: "#4a235a" }}>
         <h3 style={{ margin: 0 }}>{quote}</h3>
       </div>
 
-      {/* Блок статистики */}
       <div style={{ display: "flex", gap: "15px", marginBottom: "25px", flexWrap: "wrap" }}>
         <div style={{ flex: 1, background: "white", padding: "15px", borderRadius: "12px", textAlign: "center", boxShadow: "0 4px 10px rgba(0,0,0,0.05)" }}>
           <div style={{ fontSize: "14px", color: "#666", fontWeight: "bold" }}>Всего записей</div>
@@ -82,7 +73,6 @@ export default function Entries() {
         </div>
       </div>
 
-      {/* Форма добавления */}
       <div className="card" style={{ maxWidth: "100%", marginBottom: "30px", marginTop: "0" }}>
         <h2>Новая запись</h2>
         <form onSubmit={submit} style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
@@ -96,7 +86,6 @@ export default function Entries() {
         </form>
       </div>
 
-      {/* Фильтр и список */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "15px" }}>
         <h3 style={{ margin: 0, color: "#4a235a" }}>Мои записи</h3>
         <div>
@@ -117,25 +106,13 @@ export default function Entries() {
         
         {entries.map(e => (
           <div key={e.id} style={{ 
-            background: "white", 
-            padding: "20px", 
-            borderRadius: "12px", 
-            boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            borderLeft: `6px solid ${getMoodColor(e.mood)}`, // Цветная полоска слева
-            transition: "transform 0.2s, box-shadow 0.2s",
-            cursor: "default"
+            background: "white", padding: "20px", borderRadius: "12px", boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            borderLeft: `6px solid ${getMoodColor(e.mood)}`,
+            transition: "transform 0.2s, box-shadow 0.2s", cursor: "default"
           }}
-          onMouseEnter={(el) => {
-            el.currentTarget.style.transform = "translateX(5px)";
-            el.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.1)";
-          }}
-          onMouseLeave={(el) => {
-            el.currentTarget.style.transform = "translateX(0)";
-            el.currentTarget.style.boxShadow = "0 4px 15px rgba(0,0,0,0.05)";
-          }}
+          onMouseEnter={(el) => { el.currentTarget.style.transform = "translateX(5px)"; el.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.1)"; }}
+          onMouseLeave={(el) => { el.currentTarget.style.transform = "translateX(0)"; el.currentTarget.style.boxShadow = "0 4px 15px rgba(0,0,0,0.05)"; }}
           >
             <div>
               <span style={{ fontSize: "28px", marginRight: "15px", verticalAlign: "middle" }}>
